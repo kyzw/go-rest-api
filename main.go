@@ -10,6 +10,7 @@ import (
 
 func main() {
 	db := db.NewDB()
+	// pass struct to constructor for DI
 	userRepository := repository.NewUserRepository(db)
 	userUsecase := usecase.NewUserUsecase(userRepository)
 	userController := controller.NewUserController(userUsecase)
