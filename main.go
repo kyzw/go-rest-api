@@ -6,18 +6,21 @@ import (
 	"go-reset-api/repository"
 	"go-reset-api/router"
 	"go-reset-api/usecase"
+	"go-reset-api/validator"
 )
 
 func main() {
 	db := db.NewDB()
 	// User
 	userRepository := repository.NewUserRepository(db)
-	userUsecase := usecase.NewUserUsecase(userRepository)
+	userValidator := validator.NewUserValidator()
+	userUsecase := usecase.NewUserUsecase(userRepository, userValidator)
 	userController := controller.NewUserController(userUsecase)
 
 	// Task
 	taskRepository := repository.NewTaskRepository(db)
-	taskUsecase := usecase.NewTaskUsecase(taskRepository)
+	taskValidator := validator.NewTaskValidator()
+	taskUsecase := usecase.NewTaskUsecase(taskRepository, taskValidator)
 	taskController := controller.NewTaskController(taskUsecase)
 
 	// pass struct to constructor for DI
