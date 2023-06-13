@@ -10,10 +10,17 @@ import (
 
 func main() {
 	db := db.NewDB()
-	// pass struct to constructor for DI
+	// User
 	userRepository := repository.NewUserRepository(db)
 	userUsecase := usecase.NewUserUsecase(userRepository)
 	userController := controller.NewUserController(userUsecase)
-	e := router.NewRouter(userController)
+
+	// Task
+	taskRepository := repository.NewTaskRepository(db)
+	taskUsecase := usecase.NewTaskUsecase(taskRepository)
+	taskController := controller.NewTaskController(taskUsecase)
+
+	// pass struct to constructor for DI
+	e := router.NewRouter(userController, taskController)
 	e.Logger.Fatal(e.Start(":8080"))
 }
