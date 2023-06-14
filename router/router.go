@@ -27,8 +27,8 @@ func NewRouter(uc controller.IUserController, tc controller.ITaskController) *ec
 		CookiePath: "/",
 		CookieDomain: os.Getenv("API_DOMAIN"),
 		CookieHTTPOnly: true,
-		// CookieSameSite: http.SameSiteNoneMode, // SecureMode: true
-		CookieSameSite: http.SameSiteDefaultMode,
+		CookieSameSite: http.SameSiteNoneMode, // SecureMode: true
+		// CookieSameSite: http.SameSiteDefaultMode, // for API client test
 		// CookieMaxAge: 60,
 	}))
 
